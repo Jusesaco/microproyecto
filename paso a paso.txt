@@ -1,0 +1,29 @@
+ cd 'C:\Users\User Proalnet\Desktop\ESPECIALIZACION ANALITICA DE DATOS\COMPUTACION EN LA NUBE\Microproyecto'
+
+1. ##servidor consul
+consul agent -server -bootstrap-expect=1 -node=agent-one -bind=192.168.100.30 -data-dir=. -config-dir=/etc/consul.d -ui -client=0.0.0.0
+
+2. ## servidor proxy
+consul agent -node=agent-two -bind=192.168.100.30 -data-dir=. -config-dir=/etc/consul.d -enable-script-checks=true
+
+##servidor proxy
+ consul join 192.168.100.30
+
+## servidor proxy
+consul agent -node=agent-three -bind=192.168.100.20 -data-dir=. -config-dir=/etc/consul.d -enable-script-checks=true
+
+## servidor proxy
+consul agent -node=agent-three -bind=192.168.100.20 -data-dir=. -config-dir=/etc/consul.d -enable-script-checks=true
+
+##
+npm install artillery@1.7
+sudo artillery run prueba.yml
+
+##balancer
+sudo systemctl restart haproxy
+node index.js 3000
+artillery run prueba.yml
+node index.js 3001
+
+
+http://192.168.100.20:81/haproxy?stats
